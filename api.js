@@ -1,6 +1,10 @@
 import axios from "axios";
 import fs from "fs";
 
+import dotenv from 'dotenv';
+dotenv.config();
+
+
 const sendImage = async (imagepath) => {
     try {
         const image = fs.readFileSync(imagepath, {
@@ -11,7 +15,12 @@ const sendImage = async (imagepath) => {
             method: "POST",
             url: "https://classify.roboflow.com/skin-cancer-detection-wfldq/3",
             params: {
-                api_key: "DLJ5cqTwsYzXxBITPD61"
+                api_key: const apiKey = process.env.API_KEY;
+                         const anotherApiKey = process.env.ANOTHER_API_KEY;
+
+                         console.log('API Key:', apiKey);
+                         console.log('Another API Key:', anotherApiKey);
+
             },
             data: image,
             headers: {
