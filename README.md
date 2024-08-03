@@ -75,20 +75,12 @@ Welcome to the Skin Cancer Detection Web App! This application leverages advance
 
    You can access the API from the following website: [Skin Cancer Detection API](https://universe.roboflow.com/north-south-university-9briv/skin-cancer-detection-wfldq/model/3)
 
-5. **Run Migrations**
-
-   Apply database migrations to set up the initial schema:
-
-   ```bash
-   npm run migrate
-   ```
-
-6. **Start the Application**
+5. **Start the Application**
 
    Launch the web app with the following command:
 
    ```bash
-   npm start
+   node index.js
    ```
 
 ## Database Schema
