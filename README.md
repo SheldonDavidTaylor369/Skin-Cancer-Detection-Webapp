@@ -1,6 +1,4 @@
-Sure! I've updated the installation instructions to replace the `.env` setup with the API key configuration and included the API access URL. Here’s the revised version:
 
----
 
 # Skin Cancer Detection Web App
 
@@ -148,5 +146,3 @@ For any questions or issues, please contact the team members:
 ### Instructor
 
 - **Dr. Agughasi Victor Ikechukwu**: victora@mitmysore.in
-
----
