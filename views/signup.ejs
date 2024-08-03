@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
+    <link rel="stylesheet" href="/css/health.css">
+</head>
+<body>
+    <div class="container">
+        <div class="left">
+            <div class="image-container">
+                <img src="images/signup-image.jpg" alt="Signup Image">
+            </div>
+        </div>
+        <div class="right">
+            <div class="form-container">
+                <h2>Create Account</h2>
+                <div class="social-login">
+                    <a href="https://accounts.google.com/v3/signin/identifier?continue=https%3A%2F%2Faccounts.google.com%2F&followup=https%3A%2F%2Faccounts.google.com%2F&ifkv=AdF4I75ZE2F-gfmL-9GfS1e7D6WYeEr3BnoBMMMXA-ESwu-PiJ6Yk1pBowUK-QeHvZJz0eCdjota&passive=1209600&flowName=GlifWebSignIn&flowEntry=ServiceLogin&dsh=S-1120332482%3A1722166854184841&ddm=0" class="google-login">
+                        <button class="google-login"><img src="images/google-logo.jpg" alt="Google Logo"> Sign up with Google</button>
+                    </a>
+                    <a href="https://www.facebook.com/login/" class="facebook-login">
+                        <button class="facebook-login"><img src="images/facebook-logo.jpg" alt="Facebook Logo"> Sign up with Facebook</button>
+                    </a>
+                </div>
+                <p>- OR -</p>
+                <form action="/signup" method="post">
+                    <input type="text" name="fullname" placeholder="Full Name" required>
+                    <input type="email" name="email" placeholder="Email Address" required>
+                    <input type="password" name="password" placeholder="Password" required>
+                    <button type="submit" class="signup-btn">Create Account</button>
+                </form>
+                <p>Already have an account? <a href="/login">Login</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

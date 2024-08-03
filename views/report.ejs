@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skin Cancer Detection Report</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-boxplot@1.0.1/dist/chartjs-chart-boxplot.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-heatmap@0.1.0/dist/chartjs-chart-heatmap.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F8F8F8;
+            color: #333333;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #004B49;
+            color: #F8F8F8;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+        nav {
+            margin: 10px 0;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: #00A3A4;
+            text-decoration: none;
+        }
+        nav ul li a:hover {
+            color: #007D7D;
+        }
+        h2 {
+            color: #004B49;
+        }
+        p {
+            font-size: 1.1em;
+            margin: 20px;
+        }
+        canvas {
+            display: block;
+            margin: 0 auto;
+            max-width: 90%;
+            height: auto;
+        }
+        .container {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>SkinAnalysis</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>                
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <center>
+        <h2>Top Prediction: <%= predict.top %> (Confidence: <%= predict.confidence %>)</h2>
+        <h3>Prediction time: <%= predict.time %> seconds</h3>
+    </center>
+        <h2>Bar Chart</h2>
+        <canvas id="predictionChart" width="800" height="500"></canvas>
+
+        <h2>Line Chart</h2>
+        <canvas id="lineChart" width="800" height="500"></canvas>
+    </div>
+
+    <script>
+        const ctx = document.getElementById('predictionChart').getContext('2d');
+        const predictions = <%- JSON.stringify(predict.predictions) %>;
+        const labels = predictions.map(pred => pred.class);
+        const data = predictions.map(pred => pred.confidence);
+
+        // Bar Chart
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Confidence',
+                    data: data,
+                    backgroundColor: '#00A3A4',
+                    borderColor: '#004B49',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Class'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Confidence'
+                        },
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Line Chart
+        const lineCtx = document.getElementById('lineChart').getContext('2d');
+
+        new Chart(lineCtx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Confidence',
+                    data: data,
+                    borderColor: '#004B49',
+                    backgroundColor: 'rgba(0, 163, 164, 0.2)',
+                    borderWidth: 2,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Class'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Confidence'
+                        },
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

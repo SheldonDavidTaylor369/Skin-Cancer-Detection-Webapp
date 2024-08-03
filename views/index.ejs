@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Upload</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      color: #333333;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, rgba(0, 75, 73, 0.5), rgba(0, 75, 73, 0.3));
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      height: 100vh; /* Ensure full viewport height */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    header {
+      background-color: #004B49;
+      color: #F8F8F8;
+      padding: 10px 20px;
+      text-align: center;
+      position: absolute; /* Position header at the top */
+      width: 100%;
+      top: 0;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2em;
+    }
+    nav {
+      background-color: #003737;
+      padding: 10px 20px;
+      position: absolute; /* Position nav below header */
+      width: 100%;
+      top: 50px; /* Adjust according to header height */
+    }
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+    }
+    nav ul li {
+      margin: 0 15px;
+    }
+    nav ul li a {
+      color: #F8F8F8;
+      text-decoration: none;
+      font-size: 1.1em;
+    }
+    nav ul li a:hover {
+      text-decoration: underline;
+    }
+    .container {
+      padding: 40px; /* Increased padding */
+      max-width: 800px; /* Increased max-width */
+      background: rgba(255, 255, 255, 0.9); /* Slightly transparent white background */
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      position: relative;
+      overflow: hidden;
+      width: 100%; /* Ensure container takes full width available up to max-width */
+    }
+    .container::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(0, 75, 73, 0.5), rgba(0, 75, 73, 0.3));
+      filter: blur(8px);
+      z-index: -1; /* Make sure the gradient stays behind the form */
+    }
+    h1 {
+      color: #004B49;
+    }
+    label {
+      display: block;
+      margin-bottom: 15px; /* Increased margin */
+      font-size: 1.2em; /* Slightly larger font size */
+      color: #004B49;
+    }
+    input[type="file"] {
+      display: none;
+    }
+    .file-upload {
+      border: 2px dashed #004B49;
+      border-radius: 8px;
+      padding: 30px; /* Increased padding */
+      text-align: center;
+      cursor: pointer;
+      background-color: #E0F2F1;
+      color: #004B49;
+      position: relative;
+      min-height: 300px; /* Increased min-height */
+    }
+    .file-upload img {
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+    .file-upload span {
+      display: block;
+      margin-bottom: 15px; /* Increased margin */
+    }
+    .file-upload:hover {
+      background-color: #B2DFDB;
+    }
+    .file-upload.drag-over {
+      background-color: #B2DFDB;
+    }
+    button {
+      background-color: #004B49;
+      color: #FFFFFF;
+      border: none;
+      padding: 12px 24px; /* Increased padding */
+      border-radius: 5px;
+      font-size: 1.2em; /* Slightly larger font size */
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #003737;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Image Upload</h1>
+  </header>
+  <nav>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Services</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="container">
+    <form action="/upload" method="post" enctype="multipart/form-data">
+      <label for="image">Choose an image or drag it here:</label>
+      <div class="file-upload" id="drop-area">
+        <input type="file" id="image" name="image" accept="image/*" required>
+        <span>Drag & Drop your image here or click to select</span>
+        <img id="image-preview" src="" alt="" style="display: none;">
+      </div>
+      <button type="submit">Upload</button>
+    </form>
+  </div>
+
+  <script>
+    const dropArea = document.getElementById('drop-area');
+    const fileInput = document.getElementById('image');
+    const imagePreview = document.getElementById('image-preview');
+
+    dropArea.addEventListener('click', () => fileInput.click());
+
+    dropArea.addEventListener('dragover', (event) => {
+      event.preventDefault();
+      dropArea.classList.add('drag-over');
+    });
+
+    dropArea.addEventListener('dragleave', () => {
+      dropArea.classList.remove('drag-over');
+    });
+
+    dropArea.addEventListener('drop', (event) => {
+      event.preventDefault();
+      dropArea.classList.remove('drag-over');
+      const files = event.dataTransfer.files;
+      if (files.length) {
+        fileInput.files = files;
+        previewImage(files[0]);
+      }
+    });
+
+    fileInput.addEventListener('change', () => {
+      if (fileInput.files.length) {
+        previewImage(fileInput.files[0]);
+      }
+    });
+
+    function previewImage(file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        imagePreview.src = e.target.result;
+        imagePreview.style.display = 'block';
+      }
+      reader.readAsDataURL(file);
+    }
+  </script>
+</body>
+</html>
