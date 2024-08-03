@@ -1,4 +1,6 @@
+Sure! I've updated the installation instructions to replace the `.env` setup with the API key configuration and included the API access URL. Here’s the revised version:
 
+---
 
 # Skin Cancer Detection Web App
 
@@ -26,7 +28,7 @@ Welcome to the Skin Cancer Detection Web App! This application leverages advance
 ## Features
 
 - **Image Upload**: Users can upload images of skin lesions for analysis.
-- **Skin Cancer Detection**: The application uses a machine learning model to analyze images and predict the likelihood of skin cancer.
+- **Skin Cancer Detection**: The application uses a API to analyze images and predict the likelihood of skin cancer.
 - **Results Visualization**: Users receive a graphical representation of the analysis results, including confidence scores.
 - **Health Checkup**: Provides additional health check-up options and resources.
 - **Skin Analysis**: Offers detailed skin analysis and recommendations.
@@ -63,13 +65,15 @@ Welcome to the Skin Cancer Detection Web App! This application leverages advance
    GRANT ALL PRIVILEGES ON DATABASE your_db_name TO your_db_user;
    ```
 
-4. **Create a `.env` File**
+4. **Configure API Key**
 
-   Create a `.env` file in the root directory of the project and add your database connection details:
+   Create a `.env` file in the root directory of the project and add your API key:
 
    ```env
-   DATABASE_URL=postgres://your_db_user:your_db_password@localhost:5432/your_db_name
+   API_KEY=your_api_key
    ```
+
+   You can access the API from the following website: [Skin Cancer Detection API](https://universe.roboflow.com/north-south-university-9briv/skin-cancer-detection-wfldq/model/3)
 
 5. **Run Migrations**
 
@@ -153,3 +157,4 @@ For any questions or issues, please contact the team members:
 
 - **Dr. Agughasi Victor Ikechukwu**: victora@mitmysore.in
 
+---
