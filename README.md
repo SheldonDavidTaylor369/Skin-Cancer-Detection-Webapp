@@ -1,3 +1,5 @@
+
+
 # Skin Cancer Detection Web App
 
 ## Overview
@@ -35,6 +37,69 @@ Welcome to the Skin Cancer Detection Web App! This application leverages advance
 
 - **Node.js**: Ensure you have Node.js installed. You can download it from [nodejs.org](https://nodejs.org/).
 - **PostgreSQL**: Make sure PostgreSQL is installed and running on your machine.
+
+### Setup
+
+1. **Clone the Repository**
+
+   ```bash
+   git clone https://github.com/your-repo/skin-cancer-detection-webapp.git
+   cd skin-cancer-detection-webapp
+   ```
+
+2. **Install Dependencies**
+
+   ```bash
+   npm install
+   ```
+
+3. **Setup PostgreSQL**
+
+   Create a new database and user in PostgreSQL. Replace `your_db_name`, `your_db_user`, and `your_db_password` with your own values:
+
+   ```sql
+   CREATE DATABASE your_db_name;
+   CREATE USER your_db_user WITH ENCRYPTED PASSWORD 'your_db_password';
+   GRANT ALL PRIVILEGES ON DATABASE your_db_name TO your_db_user;
+   ```
+
+4. **Create a `.env` File**
+
+   Create a `.env` file in the root directory of the project and add your database connection details:
+
+   ```env
+   DATABASE_URL=postgres://your_db_user:your_db_password@localhost:5432/your_db_name
+   ```
+
+5. **Run Migrations**
+
+   Apply database migrations to set up the initial schema:
+
+   ```bash
+   npm run migrate
+   ```
+
+6. **Start the Application**
+
+   Launch the web app with the following command:
+
+   ```bash
+   npm start
+   ```
+
+## Database Schema
+
+Create the initial database schema with the following SQL command:
+
+```sql
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    fullname VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(60) NOT NULL,  -- Adjusted length to accommodate bcrypt hashes
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
 
 ## Usage
 
@@ -87,50 +152,4 @@ For any questions or issues, please contact the team members:
 ### Instructor
 
 - **Dr. Agughasi Victor Ikechukwu**: victora@mitmysore.in
-
-
-### Setup
-
-1. **Clone the Repository**
-
-   ```bash
-   git clone https://github.com/your-repo/skin-cancer-detection-webapp.git
-   cd skin-cancer-detection-webapp
-## Dependencies
-
-The dependencies include:
-
-- **express**: Fast, minimalist web framework for Node.js.
-- **pg**: PostgreSQL client for Node.js.
-- **dotenv**: Loads environment variables from a `.env` file.
-- **body-parser**: Middleware to parse incoming request bodies.
-- **cors**: Middleware for enabling Cross-Origin Resource Sharing.
-- **morgan**: HTTP request logger middleware for Node.js.
-
-## Setup PostgreSQL
-
-Create a new database and user in PostgreSQL. Replace `your_db_name`, `your_db_user`, and `your_db_password` with your own values:
-
-```sql
-CREATE DATABASE your_db_name;
-CREATE USER your_db_user WITH ENCRYPTED PASSWORD 'your_db_password';
-GRANT ALL PRIVILEGES ON DATABASE your_db_name TO your_db_user;
-## Create a `.env` File
-
-Create a `.env` file in the root directory of the project and add your database connection details:
-
-```env
-DATABASE_URL=postgres://your_db_user:your_db_password@localhost:5432/your_db_name
-## Run Migrations
-
-Apply database migrations to set up the initial schema:
-
-```bash
-npm run migrate
-## Start the Application
-
-Launch the web app with the following command:
-
-```bash
-npm start
 
