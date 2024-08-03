@@ -68,7 +68,7 @@ Welcome to the Skin Cancer Detection Web App! This application leverages advance
    Create a `.env` file in the root directory of the project and add your API key:
 
    ```env
-   API_KEY=your_api_key
+   API_KEY="your_api_key"
    ```
 
    You can access the API from the following website: [Skin Cancer Detection API](https://universe.roboflow.com/north-south-university-9briv/skin-cancer-detection-wfldq/model/3)
