@@ -105,7 +105,7 @@ CREATE TABLE users (
 
 ### Access the Web App
 
-Open your web browser and navigate to [http://localhost:3000](http://localhost:3000).
+Open your web browser and navigate to [http://localhost:3000].
 
 ### Upload an Image
 
